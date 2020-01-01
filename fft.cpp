@@ -36,18 +36,18 @@ void fft(poly &f)
 vl poly_mult(vl p, vl q)
 {
 	int siz = SZ(p) + SZ(q) - 1, siz1 = (1 << (32 - __builtin_clz(siz)));
-    vl res(siz);
-    if (p <= 100 || q <= 100)
-    {
-        FOR(i, 0, SZ(p))
-        {
-            FOR(j, 0, SZ(q))
-            {
-                res[i + j] += p[i] * q[j];
-            }
-        }
-        return res;
-    }
+	vl res(siz);
+	if (p <= 100 || q <= 100)
+	{
+ 		FOR(i, 0, SZ(p))
+		{
+            		FOR(j, 0, SZ(q))
+            		{
+                		res[i + j] += p[i] * q[j];
+            		}
+        	}
+        	return res;
+    	}
 	poly p1(SZ(p)), q1(SZ(q));
 	FOR(i, 0, SZ(p)) p1[i] = num(p[i], 0);
 	FOR(i, 0, SZ(q)) q1[i] = num(q[i], 0);
