@@ -20,7 +20,7 @@ vi convexhull()
 		while(SZ(upper) >= 2)
 		{
 			int x = upper[SZ(upper) - 2], y = upper[SZ(upper) - 1];
-			if (ccw(coor[x], coor[y], coor[i]))
+			if (ccw(coor[x], coor[y], coor[i]) == 1)
 			{
 				break;
 			}
@@ -35,7 +35,7 @@ vi convexhull()
 		while(SZ(lower) >= 2)
 		{
 			int x = lower[SZ(lower) - 2], y = lower[SZ(lower) - 1];
-			if (ccw(coor[x], coor[y], coor[i]))
+			if (ccw(coor[x], coor[y], coor[i]) == 1)
 			{
 				break;
 			}
