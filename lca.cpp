@@ -38,3 +38,5 @@ FOR(i, 1, 20)
 		table[i][j] = comb(table[i - 1][j], table[i - 1][j + (1 << (i - 1))]);
 	}
 }
+
+//answer for (u, v) is query(st[u], st[v])
