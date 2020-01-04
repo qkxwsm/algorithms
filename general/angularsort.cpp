@@ -1,9 +1,10 @@
 int quadrant(pll a)
 {
     if (a.se >= 0 && a.fi > 0) return 1;
-    if (a.se > 0) return 2;
-    if (a.fi < 0) return 3;
-    return 4;
+    if (a.se > 0 && a.fi <= 0) return 2;
+    if (a.se <= 0 && a.fi < 0) return 3;
+    if (a.se < 0 && a.fi >= 0) return 4;
+    return 0;
 }
 
 bool cmp(pll a, pll b)
