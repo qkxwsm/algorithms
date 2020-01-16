@@ -42,6 +42,7 @@ bool spfa()
         }
     }
     return (dist[T] < LLINF);
+    //careful here: sometimes you wanna send as much flow as you can with negative cost, in this case, exit condition is (dist[T] < 0)
 }
 pll mcmf()
 {
