@@ -6,12 +6,12 @@ using namespace __gnu_pbds;
 
 struct custom_hash
 {
-	template<class T>
-	T operator()(T v) const
-	{
-		v = (v ^ (v >> 15)) * 69;
-		return (v ^ (v >> 7));
-	}
+    long long operator()(long long x) const
+    {
+        x ^= (x >> 15); x *= 998244353;
+        return (x ^ (x >> 27));
+	//change to 7, 10007, 15 for ints
+    }
 };
 
 template<class T, class U> using hash_table = gp_hash_table<T, U, custom_hash>;
