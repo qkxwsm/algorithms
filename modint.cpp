@@ -1,3 +1,37 @@
+//just the functions
+
+const int INF = 1000000007;
+
+int add(int a, int b)
+{
+    a += b; if (a >= INF) a -= INF; return a;
+}
+int mul(int a, int b)
+{
+    return (ll) a * b % INF;
+}
+int sub(int a, int b)
+{
+    a -= b; if (a < 0) a += INF; return a;
+}
+int pwr(int a, int b)
+{
+    int res = 1;
+    while(b > 0)
+    {
+        if (b & 1) res = mul(res, a);
+        b >>= 1;
+        a = mul(a, a);
+    }
+    return res;
+}
+int dvd(int a, int b)
+{
+    return mul(a, pwr(b, INF - 2));
+}
+
+//the class
+
 struct modint
 {
     int val;
