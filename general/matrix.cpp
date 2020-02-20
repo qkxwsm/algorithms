@@ -3,12 +3,18 @@
 mat mul(mat a, mat b)
 {
     mat res;
-    FOR(i, 0, 21)
+    FOR(i, 0, SZ(a))
     {
-        FOR(j, 0, 21)
+        FOR(j, 0, SZ(b[0]))
         {
             res[i][j] = 0;
-            FOR(k, 0, 21)
+	}
+    }
+    FOR(i, 0, SZ(a))
+    {
+        FOR(j, 0, SZ(b[0]))
+        {
+            FOR(k, 0, SZ(b))
             {
                 res[i][j] = add(res[i][j], mul(a[i][k], b[k][j]));
             }
