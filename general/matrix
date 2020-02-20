@@ -1,3 +1,34 @@
+//just helper functions
+
+mat mul(mat a, mat b)
+{
+    mat res;
+    FOR(i, 0, 21)
+    {
+        FOR(j, 0, 21)
+        {
+            res[i][j] = 0;
+            FOR(k, 0, 21)
+            {
+                res[i][j] = add(res[i][j], mul(a[i][k], b[k][j]));
+            }
+        }
+    }
+    return res;
+}
+void print(mat m)
+{
+    FOR(i, 0, SZ(m))
+    {
+        FOR(j, 0, SZ(m[i]))
+        {
+            cerr << m[i][j] << ' ';
+        }
+        cerr << endl;
+    }
+    return;
+}
+
 //solve system of linear equations
 FOR(i, 0, N)
 {
@@ -41,11 +72,9 @@ mat getinv(mat m)
             m[i] = add(m[i], m[idx]);
             res[i] = add(res[i], res[idx]);
         }
-        print(m); print(res);
         int v = dvd(1, m[i][i]);
         m[i] = mul(m[i], v);
         res[i] = mul(res[i], v);
-        print(m); print(res);
         FOR(j, 0, SZ(m))
         {
             if (i == j) continue;
