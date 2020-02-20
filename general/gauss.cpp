@@ -36,15 +36,10 @@ mat getinv(mat m)
     {
         if (m[i][i] == 0)
         {
-            FOR(j, i + 1, SZ(m))
-            {
-                if (m[j][i] != 0)
-                {
-                    m[i] = add(m[i], m[j]);
-                    res[i] = add(res[i], res[j]);
-                    break;
-                }
-            }
+            int idx = i + 1;
+            while(m[idx][i] == 0) idx++;
+            m[i] = add(m[i], m[idx]);
+            res[i] = add(res[i], res[idx]);
         }
         print(m); print(res);
         int v = dvd(1, m[i][i]);
