@@ -3,14 +3,8 @@ FOR(i, 0, N)
 {
 	if (mat[i][i] == 0)
 	{
-		int idx = -1;
-		FOR(j, i + 1, R)
-		{
-			if (mat[j][i] != 0)
-			{
-				idx = j; break;
-			}
-		}
+		int idx = i + 1;
+		while(mat[idx][i] == 0) idx++;
 		mat[i] = add(mat[i], mat[idx]);
 		val[i] = add(val[i], val[idx]);
 	}
