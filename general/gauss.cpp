@@ -35,6 +35,7 @@ FOR(i, 0, N)
 	}
 }
 
+//find inverse of matrix
 mat getinv(mat m)
 {
     mat res;
