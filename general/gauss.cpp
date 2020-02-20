@@ -1,5 +1,4 @@
 //solve system of linear equations
-
 FOR(i, 0, N)
 {
 	if (mat[i][i] < EPS && mat[i][i] > -EPS)
