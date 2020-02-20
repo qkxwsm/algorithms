@@ -1,36 +1,28 @@
 //solve system of linear equations
 FOR(i, 0, N)
 {
-	if (mat[i][i] < EPS && mat[i][i] > -EPS)
+	if (mat[i][i] == 0)
 	{
 		int idx = -1;
 		FOR(j, i + 1, R)
 		{
-			if (mat[j][i] > 0.1 - EPS || mat[j][i] < -0.1 + EPS)
+			if (mat[j][i] != 0)
 			{
 				idx = j; break;
 			}
 		}
-		FOR(k, 0, N)
-		{
-			mat[i][k] += mat[idx][k];
-		}
-		val[i] += val[idx];
+		mat[i] = add(mat[i], mat[idx]);
+		val[i] = add(val[i], val[idx]);
 	}
-	val[i] /= mat[i][i];
-	FORD(j, N, i)
-	{
-		mat[i][j] /= mat[i][i];
-	}
+	int v = dvd(1, mat[i][i]);
+	mat[i] = mul(mat[i], v);
+	val[i] = mul(val[i], v);
 	FOR(j, 0, R)
 	{
 		if (j == i) continue;
-		ld co = mat[j][i];
-		val[j] -= co * val[i];
-		FOR(k, 0, N)
-		{
-			mat[j][k] -= co * mat[i][k];
-		}
+		auto v = mat[j][i]; v = sub(0, v);
+		val[j] = mul(val[j], v);
+		mat[j] = add(mat[j], mat[i]);
 	}
 }
 
