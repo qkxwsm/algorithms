@@ -25,9 +25,13 @@ int pwr(int a, int b)
     }
     return res;
 }
+int inv(int a)
+{
+    return pwr(a, INF - 2);
+}
 int dvd(int a, int b)
 {
-    return mul(a, pwr(b, INF - 2));
+    return mul(a, inv(b));
 }
 
 //the class
