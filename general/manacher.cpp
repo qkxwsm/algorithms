@@ -9,7 +9,7 @@ vi manacher(vi str)
 	int l = 1, r = 1;
 	FOR(i, 1, SZ(s))
 	{
-		res[i] = min(res[l + r - i], r - i);
+		res[i] = min(r - i, (l + r - i < 0 ? 0 : res[l + r - i]));
 		while(i + res[i] + 1 < SZ(s) && i - res[i] - 1 >= 0 && s[i + res[i] + 1] == s[i - res[i] - 1]) res[i]++;
 		if (i + res[i] > r)
 		{
