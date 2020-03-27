@@ -26,6 +26,12 @@ void dfs(int u, int p)
         ord.PB(u);
     }
 }
+int lca(int u, int v)
+{
+    u = st[u], v = st[v];
+    if (u > v) swap(u, v);
+    return query(u, v);
+}
 
 FOR(i, 0, SZ(ord))
 {
