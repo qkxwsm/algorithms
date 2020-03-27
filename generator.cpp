@@ -176,7 +176,5 @@ int32_t main()
     cout << fixed << setprecision(6);
     cerr << fixed << setprecision(4);
     ios_base::sync_with_stdio(false); cin.tie(0);
-    print(genpair(7, 13));
-    // print(gentree(13));
     return 0;
 }
