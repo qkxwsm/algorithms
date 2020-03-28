@@ -10,7 +10,6 @@ int comb(int u, int v)
 }
 int query(int l, int r)
 {
-    if (l > r) swap(l, r);
     int sz = 31 - __builtin_clz(r - l + 1);
     return comb(table[sz][l], table[sz][r - (1 << sz) + 1]);
 }
