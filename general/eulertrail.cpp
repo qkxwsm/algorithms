@@ -104,7 +104,22 @@ int32_t main()
         edge[pos].PB(neg);
         need = pos;
     }
-    dfs(need);
+    vi stk;
+    stk.PB(need);
+    while(!stk.empty())
+    {
+        int u = stk.back();
+        if (edge[u].empty())
+        {
+            ord.PB(u);
+            stk.pop_back();
+        }
+        else
+        {
+            stk.PB(edge[u].back());
+            edge[u].pop_back();
+        }
+    }
     reverse(ALL(ord));
     if (neg != -1)
     {
