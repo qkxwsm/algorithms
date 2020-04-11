@@ -61,13 +61,65 @@ int32_t main()
 
 //directed graph
 
-void dfs(int u)
-{
-    while(!edge[u].empty())
+    FOR(i, 0, N)
     {
-        int v = edge[u].back();
-        edge[u].pop_back();
-        dfs(v);
+        net[i] += SZ(edge[i]);
+        for (int j : edge[i])
+        {
+            net[j]--;
+        }
     }
-    tour.PB(u);
-}
+    int neg = -1, pos = -1;
+    FOR(i, 0, N)
+    {
+        if (net[i] < -1 || net[i] > 1)
+        {
+            cout << "NO\n";
+            return 0;
+        }
+        if (net[i] == -1)
+        {
+            if (neg != -1)
+            {
+                cout << "NO\n";
+                return 0;
+            }
+            neg = i;
+        }
+        if (net[i] == 1)
+        {
+            if (pos != -1)
+            {
+                cout << "NO\n";
+                return 0;
+            }
+            pos = i;
+        }
+    }
+    swap(pos, neg);
+    if (neg != -1)
+    {
+        edge[pos].PB(neg);
+        need = pos;
+    }
+    dfs(need);
+    reverse(ALL(ord));
+    if (neg != -1)
+    {
+        ord.pop_back();
+        if (ord.back() == pos && ord.front() == neg)
+        {
+            //do nothing
+        }
+        else
+        {
+            FOR(i, 0, SZ(ord) - 1)
+            {
+                if (ord[i] == pos && ord[i + 1] == neg)
+                {
+                    rotate(ord.begin(), ord.begin() + i + 1, ord.end());
+                    break;
+                }
+            }
+        }
+    }
