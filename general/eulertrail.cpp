@@ -59,8 +59,10 @@ int32_t main()
 	return 0;
 }
 
-//directed graph
+//directed graph. note: you also need to check if the graph is connected! (not done here)
 
+int32_t main()
+{
     FOR(i, 0, N)
     {
         net[i] += SZ(edge[i]);
@@ -123,3 +125,4 @@ int32_t main()
             }
         }
     }
+}
