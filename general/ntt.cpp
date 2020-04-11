@@ -1,4 +1,4 @@
-const int INF = 998244353;
+const int INF = 998244353; //or (5 << 25), (7 << 26)
 int pr = 3;
 vi roots;
 
