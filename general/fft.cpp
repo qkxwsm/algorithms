@@ -3,7 +3,6 @@
 typedef complex<ld> num;
 typedef vector<num> poly;
 
-const ld EPS = 1e-10;
 const ld PI = 3.141592653589793;
 poly roots;
 
