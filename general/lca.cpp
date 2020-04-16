@@ -45,3 +45,24 @@ FOR(i, 1, 20)
 }
 
 //answer for (u, v) is query(st[u], st[v])
+
+
+int lca(int u, int v)
+{
+    if (depth[u] > depth[v]) swap(u, v);
+    FORD(i, 20, 0)
+    {
+        if ((depth[v] - depth[u]) >= (1 << i)) v = anc[i][v];
+    }
+    if (u == v) return u;
+    FORD(i, 20, 0)
+    {
+        if (anc[i][u] != anc[i][v])
+        {
+            u = anc[i][u];
+            v = anc[i][v];
+        }
+    }
+    return parent[u];
+}
+
