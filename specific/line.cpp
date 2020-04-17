@@ -21,7 +21,7 @@ bool cmp(Line a, Line b) //sorts the lines by slope.
     }
     return (a.b * b.a < a.a * b.b);
 }
-pdd intersect(Line p, Line q) //intersection points of the two lines.
+pdd intersect(Line p, Line q) //intersection point of the two lines.
 {
     ld a1 = p.a, b1 = p.b, c1 = p.c;
     ld a2 = q.a, b2 = q.b, c2 = q.c;
