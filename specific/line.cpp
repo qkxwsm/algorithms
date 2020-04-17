@@ -1,10 +1,10 @@
 struct Line
 {
-    int a, b, c;
+    ll a, b, c;
     //Line ax + by = c, with b >= 0.
 };
 
-int quadrant(int x, int y)
+int quadrant(ll x, ll y)
 {
     if (x > 0 && y >= 0) return 1;
     if (x <= 0 && y > 0) return 2;
@@ -12,8 +12,7 @@ int quadrant(int x, int y)
     if (x >= 0 && y < 0) return 4;
     return 0;
 }
-//sorts the lines by slope.
-bool cmp(Line a, Line b)
+bool cmp(Line a, Line b) //sorts the lines by slope.
 {
     int qa = quadrant(a.a, a.b), qb = quadrant(b.a, b.b);
     if (qa != qb)
@@ -22,9 +21,7 @@ bool cmp(Line a, Line b)
     }
     return (a.b * b.a < a.a * b.b);
 }
-
-//finds the intersection points of two lines
-pdd intersect(Line p, Line q)
+pdd intersect(Line p, Line q) //intersection points of the two lines.
 {
     ld a1 = p.a, b1 = p.b, c1 = p.c;
     ld a2 = q.a, b2 = q.b, c2 = q.c;
