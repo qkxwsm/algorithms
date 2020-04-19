@@ -1,4 +1,4 @@
-//fft: sum convolution
+//sum convolution
 
 typedef complex<ld> num;
 typedef vector<num> poly;
@@ -67,7 +67,7 @@ vl conv(vl p, vl q)
     return res;
 }
 
-//ntt: sum convolution
+//sum convolution modulo p
 
 const int INF = 998244353; //or (5 << 25), (7 << 26)
 int pr = 3;
@@ -135,9 +135,9 @@ vi conv(vi p, vi q)
     return p;
 }
 
-//fwht: xor convolution
+//xor convolution
 
-void fwht(vl &f)
+void xorfft(vl &f)
 {
     int n = 31 - __builtin_clz(SZ(f));
     FOR(i, 0, n)
