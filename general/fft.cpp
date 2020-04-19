@@ -104,9 +104,9 @@ void ntt(vi &f)
 vi poly_mult(vi p, vi q)
 {
     int deg = SZ(p) + SZ(q) - 1, siz = (1 << (32 - __builtin_clz(deg - 1)));
-    vi res(deg);
     if (min(SZ(p), SZ(q)) <= 100)
     {
+        vi res(deg);
         FOR(i, 0, SZ(p))
         {
             FOR(j, 0, SZ(q))
