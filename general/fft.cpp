@@ -144,7 +144,7 @@ void xorfft(vl &f)
     {
         FOR(j, 0, SZ(f))
         {
-            if ((j & (1 << i))) continue;
+            if (j & (1 << i)) continue;
             ll a = f[j], b = f[j + (1 << i)];
             f[j] = a + b;
             f[j + (1 << i)] = a - b;
@@ -167,5 +167,48 @@ vl conv(vl p, vl q)
     {
         p[i] /= siz;
     }
+    return p;
+}
+
+//or convolution. 
+
+void fwht(vl &f, bool rev)
+{
+    int n = 31 - __builtin_clz(SZ(f));
+    FOR(i, 0, n)
+    {
+        FOR(j, 0, SZ(f))
+        {
+            if (j & (1 << i)) continue;
+            //for and convolution, swap the indices below
+            if (rev) f[j + (1 << i)] -= f[j];
+            else f[j + (1 << i)] += f[j];
+        }
+    }
+}
+vl poly_mult(vl p, vl q)
+{
+    int siz = (1 << (32 - __builtin_clz(max(SZ(p), SZ(q)) - 1)));
+    if (min(SZ(p), SZ(q)) <= 100)
+    {
+        vl res(siz);
+        FOR(i, 0, SZ(p))
+        {
+            FOR(j, 0, SZ(q))
+            {
+                res[i | j] += p[i] * q[j];
+            }
+        }
+        return res;
+    }
+    p.resize(siz);
+    q.resize(siz);
+    fwht(p, false);
+    fwht(q, false);
+    FOR(i, 0, siz)
+    {
+        p[i] *= q[i];
+    }
+    fwht(p, true);
     return p;
 }
