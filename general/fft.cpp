@@ -139,34 +139,21 @@ vi conv(vi p, vi q)
 
 void fwht(vl &f)
 {
-    for (int i = 1; i < SZ(f); i <<= 1)
+    int n = 31 - __builtin_clz(SZ(f));
+    FOR(i, 0, n)
     {
-        for (int j = 0; j < SZ(f); j += (i << 1))
+        FOR(j, 0, SZ(f))
         {
-            FOR(k, 0, i)
-            {
-                ll a = f[j + k], b = f[j + k + i];
-                f[j + k] = a + b;
-                f[j + k + i] = a - b;
-            }
+            if ((j & (1 << i))) continue;
+            ll a = f[j], b = f[j + (1 << i)];
+            f[j] = a + b;
+            f[j + (1 << i)] = a - b;
         }
     }
 }
 vl conv(vl p, vl q)
 {
     int siz = (1 << (32 - __builtin_clz(max(SZ(p), SZ(q)) - 1)));
-    if (min(SZ(p), SZ(q)) <= 100)
-    {
-        vl res(siz);
-        FOR(i, 0, SZ(p))
-        {
-            FOR(j, 0, SZ(q))
-            {
-                res[i ^ j] += p[i] * q[j];
-            }
-        }
-        return res;
-    }
     p.resize(siz);
     q.resize(siz);
     fwht(p);
