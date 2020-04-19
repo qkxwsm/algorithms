@@ -1,4 +1,4 @@
-//fft
+//fft: sum convolution
 
 typedef complex<ld> num;
 typedef vector<num> poly;
@@ -34,7 +34,7 @@ void fft(poly &f)
         swap(f, g);
     }
 }
-vl poly_mult(vl p, vl q)
+vl conv(vl p, vl q)
 {
     int siz = SZ(p) + SZ(q) - 1, siz1 = (1 << (32 - __builtin_clz(siz)));
     vl res(siz);
@@ -67,7 +67,7 @@ vl poly_mult(vl p, vl q)
     return res;
 }
 
-//ntt
+//ntt: sum convolution
 
 const int INF = 998244353; //or (5 << 25), (7 << 26)
 int pr = 3;
@@ -101,7 +101,7 @@ void ntt(vi &f)
         swap(f, g);
     }
 }
-vi poly_mult(vi p, vi q)
+vi conv(vi p, vi q)
 {
     int deg = SZ(p) + SZ(q) - 1, siz = (1 << (32 - __builtin_clz(deg - 1)));
     if (min(SZ(p), SZ(q)) <= 100)
@@ -132,5 +132,54 @@ vi poly_mult(vi p, vi q)
     }
     reverse(p.begin() + 1, p.end());
     p.resize(deg);
+    return p;
+}
+
+//fwht: xor convolution
+
+void fwht(vl &f)
+{
+    for (int i = 1; i < SZ(f); i <<= 1)
+    {
+        for (int j = 0; j < SZ(f); j += (i << 1))
+        {
+            FOR(k, 0, i)
+            {
+                ll a = f[j + k], b = f[j + k + i];
+                f[j + k] = a + b;
+                f[j + k + i] = a - b;
+            }
+        }
+    }
+}
+
+vl conv(vl p, vl q)
+{
+    int siz = (1 << (32 - __builtin_clz(max(SZ(p), SZ(q)) - 1)));
+    if (min(SZ(p), SZ(q)) <= 100)
+    {
+        vl res(siz);
+        FOR(i, 0, SZ(p))
+        {
+            FOR(j, 0, SZ(q))
+            {
+                res[i ^ j] += p[i] * q[j];
+            }
+        }
+        return res;
+    }
+    p.resize(siz);
+    q.resize(siz);
+    fwht(p);
+    fwht(q);
+    FOR(i, 0, siz)
+    {
+        p[i] *= q[i];
+    }
+    fwht(p);
+    FOR(i, 0, siz)
+    {
+        p[i] /= siz;
+    }
     return p;
 }
