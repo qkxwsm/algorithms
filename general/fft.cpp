@@ -152,7 +152,6 @@ void fwht(vl &f)
         }
     }
 }
-
 vl conv(vl p, vl q)
 {
     int siz = (1 << (32 - __builtin_clz(max(SZ(p), SZ(q)) - 1)));
