@@ -47,21 +47,28 @@ node *merge(node *l, node *r)
 		pull(r); return r;
 	}
 }
-pnn split(node *t, int v)
+pnn split(node *t, int v, bool flag = true) //flag = 1: split by value. flag = 0: split by subtree size. everything < v goes to the left.
 {
-	//exactly v values go to the left
 	if (!t) return {t, t};
 	prop(t);
-	int cur = (t -> ch[0] ? t -> ch[0] -> subt : 0) + 1;
-	if (cur <= v)
+	int cur;
+	if (flag)
 	{
-		pnn p = split(t -> ch[1], v - cur);
+		cur = t -> val;
+	}
+	else
+	{
+		cur = (t -> ch[0] ? t -> ch[0] -> subt : 0);
+	}
+	if (cur < v)
+	{
+		pnn p = split(t -> ch[1], flag ? v : v - cur - 1, flag);
 		t -> ch[1] = p.fi; pull(t);
 		return {t, p.se};
 	}
 	else
 	{
-		pnn p = split(t -> ch[0], v);
+		pnn p = split(t -> ch[0], v, flag);
 		t -> ch[0] = p.se; pull(t);
 		return {p.fi, t};
 	}
