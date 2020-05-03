@@ -10,6 +10,15 @@ int ccw(pll a, pll b, pll c)
 	c.fi -= b.fi; c.se -= b.se;
 	return sgn(a.fi * c.se - a.se * c.fi);
 }
+ll intersect(pll a, pll b)
+{
+    assert(a.fi < b.fi);
+    //a.fi * x + a.se > b.fi * x + b.se
+    //(b.fi - a.fi) * x > (a.se - b.se)
+    ll num = a.se - b.se, denom = b.fi - a.fi;
+    //return floor(num / denom) + 1
+    return (num / denom) - (num % denom < 0) + 1;
+}
 
 vi convexhull()
 {
