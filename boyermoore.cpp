@@ -31,7 +31,7 @@ while(!lis.empty())
         else
         {
             lis.pop_back();
-            if (!lis.empty()) lis.pop_back();
+            lis.pop_back();
         }
     }
     else
