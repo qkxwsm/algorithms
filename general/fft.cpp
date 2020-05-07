@@ -172,6 +172,7 @@ vl conv(vl p, vl q)
 
 //or convolution. 
 
+//note: when rev is false, this is essentially sum over subsets!
 void fwht(vl &f, bool rev)
 {
     int n = 31 - __builtin_clz(SZ(f));
