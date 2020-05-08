@@ -3,6 +3,7 @@ vi edge[MAXN];
 int subtree[MAXN], parent[MAXN], depth[MAXN], head[MAXN];
 int st[MAXN], ft[MAXN];
 
+//insert segtree and lca templates here
 void dfs(int u, int p)
 {
     subtree[u] = 1;
@@ -57,24 +58,23 @@ int lca(int u, int v)
     }
     return parent[u];
 }
-int ask(int u, int v)
+int ask(int u, int v) //this is in the case where you don't include the lca, the case where you do is similar
 {
     int res = -INF;
-    //u is ancestor of v.
+    //ask u ----> v
     //what's the max on this path?
-    while(true)
+    while(u != v)
     {
-        int w = head[v];
-        if (depth[w] > depth[u])
+        if (head[u] == head[v])
         {
-            ckmax(res, query(1, 0, N - 1, st[w], st[v]));
-            v = parent[w];
-        }
-        else
-        {
-            ckmax(res, query(1, 0, N - 1, st[u], st[v]));
+            if (u != v)
+            {
+                ckmax(res, query(1, 0, N - 1, st[u] + 1, st[v]));
+            }
             break;
         }
+        ckmax(res, query(1, 0, N - 1, st[head[v]], st[v]));
+        v = parent[head[v]];
     }
     return res;
 }
