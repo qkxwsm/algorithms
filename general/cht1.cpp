@@ -1,6 +1,5 @@
 
     vi opt; opt.PB(0); int iter = 0;
-    dp[0] = B[0] * (S - A[0]);
     FOR(i, 1, N + 1)
     {
         while(iter + 1 < SZ(opt) && dp[opt[iter + 1]] + cost(opt[iter + 1], i) <= dp[opt[iter]] + cost(opt[iter], i)) iter++;
