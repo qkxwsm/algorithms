@@ -50,7 +50,7 @@ pll mcmf()
     while(true)
     {
         if (!spfa()) break;
-        int gain = INF;
+        int gain = INF; //if you're just looking for the cost of sending a certain flow, modify this.
         for (int u = T; u != S; u = to[par[u] ^ 1])
         {
             ckmin(gain, cap[par[u]]);
