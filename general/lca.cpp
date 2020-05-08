@@ -74,7 +74,7 @@ int lca(int u, int v)
     {
         anc[0][i] = parent[i];
     }
-    FOR(i, 0, 20)
+    FOR(i, 1, 20)
     {
         FOR(j, 0, N + 1)
         {
