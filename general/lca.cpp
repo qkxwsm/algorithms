@@ -1,3 +1,5 @@
+/* LCA Method 1: Sparse Table RMQ */
+
 int N;
 vi edge[MAXN];
 vi ord;
@@ -46,6 +48,7 @@ FOR(i, 1, 20)
 
 //answer for (u, v) is query(st[u], st[v])
 
+/* LCA Method 2: Jump Pointers */
 
 int lca(int u, int v)
 {
@@ -66,3 +69,15 @@ int lca(int u, int v)
     return parent[u];
 }
 
+
+    FOR(i, 0, N + 1)
+    {
+        anc[0][i] = parent[i];
+    }
+    FOR(i, 0, 20)
+    {
+        FOR(j, 0, N + 1)
+        {
+            anc[i][j] = anc[i - 1][anc[i - 1][j]];
+        }
+    }
