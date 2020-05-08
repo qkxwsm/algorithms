@@ -1,4 +1,4 @@
-/* DINIC'S ALGORITHM: Without Scaling */
+/* Dinic's Algorithm: Without Scaling */
 
 int S, T, E = 2;
 int head[MAXN], to[MAXN], link[MAXN], dist[MAXN], par[MAXN];
@@ -68,7 +68,7 @@ ll maxflow()
 	return res;
 }
 
-/* DINIC'S ALGORITHM: Without Scaling */
+/* Dinic's Algorithm: With Scaling */
 
 bool bfs(int c)
 {
