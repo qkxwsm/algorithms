@@ -1,3 +1,6 @@
+/* DINIC'S ALGORITHM: Without Scaling */
+
+int S, T, E = 2;
 int head[MAXN], to[MAXN], link[MAXN], dist[MAXN], par[MAXN];
 ll cap[MAXN];
 
@@ -61,5 +64,50 @@ ll maxflow()
 	{
 		res += aug(S, LLINF);
 	}
+	/*
 	return res;
+}
+
+/* DINIC'S ALGORITHM: Without Scaling */
+
+bool bfs(int c)
+{
+    FOR(i, 0, T + 1)
+    {
+        dist[i] = INF;
+        par[i] = -1;
+    }
+    dist[S] = 0;
+    queue<int> q; q.push(S);
+    while(!q.empty())
+    {
+        int u = q.front(); q.pop();
+        for (int e = head[u]; e; e = link[e])
+        {
+            if (cap[e] < c) continue;
+            int v = to[e];
+            if (dist[v] <= dist[u] + 1) continue;
+            dist[v] = dist[u] + 1;
+            par[v] = e;
+            q.push(v);
+        }
+    }
+    return (dist[T] != INF);
+}
+int maxflow()
+{
+    int res = 0;
+    FORD(i, 28, 0)
+    {
+        while (bfs(1 << i))
+        {
+            for (int u = T; u != S; u = to[par[u] ^ 1])
+            {
+                cap[par[u]] -= (1 << i);
+                cap[par[u] ^ 1] += (1 << i);
+            }
+            res += (1 << i);
+        }
+    }
+    return res;
 }
