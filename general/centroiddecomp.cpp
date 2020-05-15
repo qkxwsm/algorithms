@@ -1,3 +1,5 @@
+//See cf100570F
+
 int parent[MAXN], depth[MAXN], weight[MAXN], subtree[MAXN];
 bitset<MAXN> dead;
 vi edge[MAXN];
