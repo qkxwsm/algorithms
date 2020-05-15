@@ -1,4 +1,5 @@
 //push, pop, find min/max in a queue.
+//implements a queue with two stacks.
 struct minqueue
 {
     vpi cur, todo;
@@ -7,6 +8,11 @@ struct minqueue
     void push(int x)
     {
         pii p = {x, x};
+        if (empty())
+        {
+            cur.PB(p);
+            return;
+        }
         if (!todo.empty())
         {
             ckmin(p.fi, todo.back().fi);
@@ -52,3 +58,4 @@ struct minqueue
         return cur.empty() && todo.empty();
     }
 };
+
