@@ -1,9 +1,9 @@
-//implements a minqueue using two stacks.
-
+//push, pop, find min/max in a queue.
 struct minqueue
 {
     vpi cur, todo;
-    //min up to here, actual value
+    //each of these vectors is actually two stacks.
+    //stores pair (min up to here, actual value)
     void push(int x)
     {
         pii p = {x, x};
@@ -20,7 +20,10 @@ struct minqueue
             swap(cur, todo);
             reverse(ALL(cur));
             cur[0].fi = cur[0].se;
-            FOR(i, 1, SZ(cur)) ckmin(cur[i].fi, cur[i - 1].fi);
+            FOR(i, 1, SZ(cur))
+            {
+                cur[i].fi = min(cur[i - 1].fi, cur[i].se);
+            }
         }
         cur.pop_back();
     }
