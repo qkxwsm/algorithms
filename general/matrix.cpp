@@ -76,6 +76,13 @@ void print(mat m)
 //solve system of linear equations
     FOR(i, 0, MAGIC)
     {
+        if (coef[i][i] == 0)
+        {
+            int idx = i + 1;
+            while(coef[idx][i] == 0) idx++;
+            coef[i] = add(coef[i], coef[idx]);
+            num[i] = add(num[i], num[idx]);
+        }
         int c = dvd(1, coef[i][i]);
         coef[i] = mul(coef[i], c);
         num[i] = mul(num[i], c);
