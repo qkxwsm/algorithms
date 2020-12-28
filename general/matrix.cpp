@@ -1,5 +1,43 @@
 //just helper functions
 
+row mul(row a, int v)
+{
+    FOR(i, 0, MAGIC)
+    {
+        a[i] = mul(a[i], v);
+    }
+    return a;
+}
+row add(row a, row b)
+{
+    FOR(i, 0, MAGIC)
+    {
+        a[i] = add(a[i], b[i]);
+    }
+    return a;
+}
+mat mul(mat a, int v)
+{
+    FOR(i, 0, MAGIC)
+    {
+        FOR(j, 0, MAGIC)
+        {
+            a[i][j] = mul(a[i][j], v);
+        }
+    }
+    return a;
+}
+mat add(mat a, mat b)
+{
+    FOR(i, 0, MAGIC)
+    {
+        FOR(j, 0, MAGIC)
+        {
+            a[i][j] = add(a[i][j], b[i][j]);
+        }
+    }
+    return a;
+}
 mat mul(mat a, mat b)
 {
     mat res;
@@ -36,26 +74,19 @@ void print(mat m)
 }
 
 //solve system of linear equations
-FOR(i, 0, N)
-{
-	if (mat[i][i] == 0)
-	{
-		int idx = i + 1;
-		while(mat[idx][i] == 0) idx++;
-		mat[i] = add(mat[i], mat[idx]);
-		val[i] = add(val[i], val[idx]);
-	}
-	int v = dvd(1, mat[i][i]);
-	mat[i] = mul(mat[i], v);
-	val[i] = mul(val[i], v);
-	FOR(j, 0, R)
-	{
-		if (j == i) continue;
-		auto v = mat[j][i]; v = sub(0, v);
-		val[j] = mul(val[j], v);
-		mat[j] = add(mat[j], mat[i]);
-	}
-}
+    FOR(i, 0, MAGIC)
+    {
+        int c = dvd(1, coef[i][i]);
+        coef[i] = mul(coef[i], c);
+        num[i] = mul(num[i], c);
+        FOR(j, 0, MAGIC)
+        {
+            if (j == i) continue;
+            int v = sub(0, coef[j][i]);
+            coef[j] = add(coef[j], mul(coef[i], v));
+            num[j] = add(num[j], mul(num[i], v));
+        }
+    }
 
 //find inverse of matrix
 mat getinv(mat m)
