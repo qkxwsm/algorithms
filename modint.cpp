@@ -1,7 +1,5 @@
 //just the functions
 
-const int INF = 1000000007;
-
 int add(int a, int b)
 {
     a += b; if (a >= INF) a -= INF; return a;
