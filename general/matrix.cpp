@@ -129,3 +129,19 @@ mat getinv(mat m)
     }
     return res;
 }
+
+//insert vector into vector basis
+
+void ins(int i)
+{
+    FORD(j, N, 0)
+    {
+        if (!eq[i][j]) continue;
+        if (basis[j] == -1)
+        {
+            basis[j] = i;
+            return;
+        }
+        eq[i] ^= eq[basis[j]];
+    }
+}
