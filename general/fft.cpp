@@ -67,7 +67,7 @@ vl conv(vl p, vl q)
     return res;
 }
 
-//sum convolution modulo p
+//sum convolution modulo p (ntt)
 
 const int INF = 998244353; //or (5 << 25), (7 << 26)
 int pr = 3;
@@ -181,7 +181,7 @@ void fwht(vl &f, bool rev)
         FOR(j, 0, SZ(f))
         {
             if (j & (1 << i)) continue;
-            //for and convolution, swap the indices below
+            //for and convolution, swap the two lines below
             if (rev) f[j + (1 << i)] -= f[j];
             else f[j + (1 << i)] += f[j];
         }
