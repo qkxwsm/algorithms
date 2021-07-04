@@ -1,2 +1,1 @@
-# algorithms
-algorithms
+Algorithm Templates for Competitive Programming.
